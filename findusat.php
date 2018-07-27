@@ -59,7 +59,7 @@ function location_address_meta_box()
 		<ul>
 			<li><input type="text" name="adress_line_1" placeholder="Adress Line 1" class="address_line_1"/></li>
 			<li><input type="text" name="adress_line_2" placeholder="Adress Line 2" class="address_line_2" /></li>
-			<li><input type="submit" class="submit_address" /></li>
+			<li><input type="submit" class="submit_address" value="Generate Coordinates"/></li>
 			<li><input type="text" name="x_coordinate" placeholder="X Coordinate" id="x_coordinate" /></li>
 			<li><input type="text" name="y_coordinate" placeholder="Y Coordinate" id="y_coordinate" /></li>
 			<a href="" id="mapsLink">Map</a>

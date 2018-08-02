@@ -98,7 +98,7 @@
 	/*
 	 * save the meta
 	 */
-	function save_metabox_callback( $post_id ) {
+	function save_findusat_meta( $post_id ) {
 	 
 	    if ( ! isset( $_POST['nonce'] ) ) {
 	        return;
@@ -144,7 +144,7 @@
 	     
 	}
 
-	add_action( 'save_post', 'save_metabox_callback' );
+	add_action( 'save_post', 'save_findusat_meta' );
 
 	/*
 	 * load styles and JS for front end of website.

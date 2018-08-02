@@ -19,25 +19,27 @@ jQuery(function($) {
         $('#y_coordinate').val(lat_lng[1]);
         console.log('lat_lng has been returned');
         $('#mapsLink').attr("href","https://www.google.com/maps/@"+lat_lng[0]+","+lat_lng[1]+",12z");
- var map;
-        function initMap() {
-         
-
-          var myLatLng = {lat: lat_lng[0], lng: lat_lng[1]};
-
-          map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
-            center: myLatLng
-          });
-
-          var marker = new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            title: 'Hello World!'
-          });
-        }
+        initMap();
       }
     });
   	return false;
   });
 });
+
+function initMap()
+{
+  var lat =  parseInt($('#x_coordinate').val());
+  var lng = parseInt($('#y_coordinate').val());
+  var myLatLng = {lat: lat, lng: lng};
+  console.log(myLatLng);
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 4,
+    center: {lat: lat, lng: lng}
+  });
+
+  var marker = new google.maps.Marker({
+    position: {lat: lat, lng: lng},
+    map: map,
+    title: 'Hello World!'
+  });
+}

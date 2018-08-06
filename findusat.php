@@ -85,53 +85,31 @@
 	/*
 	 * save the meta
 	 */
-	function save_findusat_meta( $post_id ) {
-	 
-	    if ( ! isset( $_POST['nonce'] ) ) {
-	        return;
-	    }
-	 
-	    if ( ! wp_verify_nonce( $_POST['nonce'], 'nonce_value' ) ) {
-	        return;
-	    }
-	 
-	    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-	        return;
-	    }
-	 
+	function save_findusat_meta( $post_id, $post )
+	{
 	    if ( ! current_user_can( 'edit_post', $post_id ) ) {
 	        return;
 	    }
 	 
-	    if ( isset( $_POST['post_type'] ) && 'page' === $_POST['post_type'] ) {
-	 
-	        // do stuff
-			if (array_key_exists('x_coordinate', $_POST)) {
-				update_post_meta(
-					$post_id,
-					'x_coordinate',
-					$_POST['x_coordinate']
-				);
-			}
-			if (array_key_exists('y_coordinate', $_POST)) {
-				update_post_meta(
-					$post_id,
-					'y_coordinate',
-					$_POST['y_coordinate']
-				);
-			}
-	 
-	    }
-	 
-	    // Check if $_POST field(s) are available
-	 
-	    // Sanitize
-	 
-	    // Save
-	     
-	}
+		// set default values incase user didn't set them.
+		$findusat_meta['address_line_1'] = isset($_POST['address_line_1']) ? $_POST['address_line_1'] : 'none';
+		$findusat_meta['address_line_2'] = isset($_POST['address_line_2']) ? $_POST['address_line_2'] : 'nope';
+		$findusat_meta['x_coordinate'] = isset($_POST['x_coordinate']) ? $_POST['x_coordinate'] : 'nota';
+		$findusat_meta['y_coordinate'] = isset($_POST['y_coordinate']) ? $_POST['y_coordinate'] : 'zip';
 
-	add_action( 'save_post', 'save_findusat_meta' );
+		foreach ( $findusat_meta as $key => $value )
+		{
+			if ( $post->post_type == 'revision' ) return;
+			$value = implode( ',', (array)$value );
+			if ( get_post_meta( $post->ID, $key, FALSE ) ) {
+				update_post_meta( $post->ID, $key, $value );
+			} else {
+				add_post_meta( $post->ID, $key, $value );
+			}
+			if ( !$value ) delete_post_meta( $post->ID, $key );
+		}
+	}
+	add_action( 'save_post', 'save_findusat_meta', 1, 2 );
 
 	/*
 	 * load styles and JS for front end of website.

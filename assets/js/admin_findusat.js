@@ -19,18 +19,18 @@ jQuery(function($) {
         $('#y_coordinate').val(lat_lng[1]);
         console.log('lat_lng has been returned');
         $('#mapsLink').attr("href","https://www.google.com/maps/@"+lat_lng[0]+","+lat_lng[1]+",12z");
-        initMap();
+        ajax_initMap();
       }
     });
   	return false;
   });
 });
 
-function initMap()
 {
   var lat =  parseInt($('#x_coordinate').val());
   var lng = parseInt($('#y_coordinate').val());
   var myLatLng = {lat: lat, lng: lng};
+function ajax_initMap()
   console.log(myLatLng);
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 4,

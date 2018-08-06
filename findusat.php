@@ -57,41 +57,25 @@
 	 * output the content of location metabox
 	 */
 	function location_address_meta_box()
-	{
-		$address_line_1 = '';
-		$address_line_2 = '';
-		$x_coordinate = '';
-		$y_coordinate = '';
+	{ 
+
+		$coordinate_data = get_post_meta( get_the_ID(), 'address_meta', true );
+		$address_line_1 = get_post_meta( get_the_ID(), 'address_line_1', true );
+		$address_line_2 = get_post_meta( get_the_ID(), 'address_line_2', true );
+		$x_coordinate = get_post_meta( get_the_ID(), 'x_coordinate', true );
+		$y_coordinate = get_post_meta( get_the_ID(), 'y_coordinate', true );
 		
 		?>
 
 		<ul>
-			<li><input type="text" name="adress_line_1" placeholder="Adress Line 1" class="address_line_1" value="<?php if ( $address_line_1 != '') { echo $address_line_1; } ?>"/></li>
-			<li><input type="text" name="adress_line_2" placeholder="Adress Line 2" class="address_line_2" /></li>
+			<li><input type="text" name="address_line_1" placeholder="Adress Line 1" class="address_line_1" value="<?php echo $address_line_1; ?>" /></li>
+			<li><input type="text" name="address_line_2" placeholder="Adress Line 2" class="address_line_2" value="<?php echo $address_line_2; ?>"  /></li>
 			<li><input type="submit" class="submit_address" value="Generate Coordinates"/></li>
-			<li><input type="text" name="x_coordinate" placeholder="X Coordinate" id="x_coordinate" /></li>
-			<li><input type="text" name="y_coordinate" placeholder="Y Coordinate" id="y_coordinate" /></li>
+			<li><input type="text" name="x_coordinate" placeholder="X Coordinate" id="x_coordinate" value="<?php echo $x_coordinate; ?>"  /></li>
+			<li><input type="text" name="y_coordinate" placeholder="Y Coordinate" id="y_coordinate" value="<?php echo $y_coordinate; ?>"  /></li>
 			<a href="" id="mapsLink">Map</a>
 			<div id="map"></div>
-			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-cwIrO3AZGN7BWEqnQCpak6fD_nvL4Zk&callback=initMap"
-    async defer></script>
- 	<script type="text/javascript">
-    		function initMap()
-			{
-			  var myLatLng = {lat: 0, lng: 0};
-
-			  map = new google.maps.Map(document.getElementById('map'), {
-			    zoom: 4,
-			    center: myLatLng
-			  });
-
-			  var marker = new google.maps.Marker({
-			    position: myLatLng,
-			    map: map,
-			    title: 'Hello World!'
-			  });
-			}
-			</script>
+ 
 		</ul>
 
 		<?php

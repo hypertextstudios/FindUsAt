@@ -8,6 +8,9 @@
 		Author URI: andrewkaser.com
 	*/
 
+	$googlemaps_api_key = 'AIzaSyAbbaCFnkLFkAKUX8pmXBdnZtkjO206VSg';
+
+
 	add_action( 'admin_menu', 'findusat_menu' );
 	add_action( 'wp_enqueue_scripts', 'findusat_adding_scripts' );
 	add_action( 'admin_enqueue_scripts', 'findusat_adding_admin_scripts' );
@@ -162,9 +165,15 @@
 	 */
 	function findusat_adding_admin_scripts()
 	{
+		global $googlemaps_api_key;
+
 		wp_register_style( 'findusat_admin_style', plugins_url( 'assets/css/admin_findusat.css', __FILE__) );
 		wp_enqueue_style( 'findusat_admin_style' );
-		wp_register_script( 'findusat_admin_script', plugins_url('assets/js/admin_findusat.js', __FILE__), array('jquery'), '1.1', true );
+
+		wp_register_script( 'findusat_google_maps_api', 'https://maps.googleapis.com/maps/api/js?key='.$googlemaps_api_key, '1', true );
+		wp_enqueue_script( 'findusat_google_maps_api' );
+
+		wp_register_script( 'findusat_admin_script', plugins_url('assets/js/admin_findusat.js', __FILE__), array('jquery', 'findusat_google_maps_api'), '1.1', true );
 		wp_enqueue_script( 'findusat_admin_script' );
 	}
 

@@ -24,22 +24,28 @@ jQuery(function($) {
     });
   	return false;
   });
-});
 
+if ( $('#x_coordinate') != '' && $('#y_coordinate') != '' )
 {
-  var lat =  parseInt($('#x_coordinate').val());
-  var lng = parseInt($('#y_coordinate').val());
-  var myLatLng = {lat: lat, lng: lng};
+  console.log('coordinates are set!');
+  ajax_initMap();
+}
+
 function ajax_initMap()
+{ 
+  var lat = parseFloat( $('#x_coordinate').val() );
+  var lng = parseFloat( $('#y_coordinate').val() );
+  var myLatLng = { lat: lat, lng: lng };
   console.log(myLatLng);
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 4,
-    center: {lat: lat, lng: lng}
+    center: myLatLng
   });
 
   var marker = new google.maps.Marker({
-    position: {lat: lat, lng: lng},
-    map: map,
-    title: 'Hello World!'
+    position: myLatLng,
+    map: map
   });
 }
+
+});

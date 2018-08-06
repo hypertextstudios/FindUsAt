@@ -34,13 +34,11 @@
 	 * register the custom post type
 	 */
 	function findusat_locations_init() {
-	    $args = array(
-	      'public' => true,
-	      'label'  => 'Locations'
-	    );
-	    register_post_type( 'location', $args );
-
-
+		$args = array(
+			'public' => true,
+			'label' => 'Locations'
+		);
+		register_post_type( 'location', $args );
 	}
 	add_action( 'init', 'findusat_locations_init' );
 
@@ -57,29 +55,23 @@
 	 * output the content of location metabox
 	 */
 	function location_address_meta_box()
-	{ 
-
-		$coordinate_data = get_post_meta( get_the_ID(), 'address_meta', true );
+	{
 		$address_line_1 = get_post_meta( get_the_ID(), 'address_line_1', true );
 		$address_line_2 = get_post_meta( get_the_ID(), 'address_line_2', true );
 		$x_coordinate = get_post_meta( get_the_ID(), 'x_coordinate', true );
 		$y_coordinate = get_post_meta( get_the_ID(), 'y_coordinate', true );
-		
 		?>
 
 		<ul>
 			<li><input type="text" name="address_line_1" placeholder="Adress Line 1" class="address_line_1" value="<?php echo $address_line_1; ?>" /></li>
-			<li><input type="text" name="address_line_2" placeholder="Adress Line 2" class="address_line_2" value="<?php echo $address_line_2; ?>"  /></li>
+			<li><input type="text" name="address_line_2" placeholder="Adress Line 2" class="address_line_2" value="<?php echo $address_line_2; ?>" /></li>
 			<li><input type="submit" class="submit_address" value="Generate Coordinates"/></li>
-			<li><input type="text" name="x_coordinate" placeholder="X Coordinate" id="x_coordinate" value="<?php echo $x_coordinate; ?>"  /></li>
-			<li><input type="text" name="y_coordinate" placeholder="Y Coordinate" id="y_coordinate" value="<?php echo $y_coordinate; ?>"  /></li>
+			<li><input type="text" name="x_coordinate" placeholder="X Coordinate" id="x_coordinate" value="<?php echo $x_coordinate; ?>" /></li>
+			<li><input type="text" name="y_coordinate" placeholder="Y Coordinate" id="y_coordinate" value="<?php echo $y_coordinate; ?>" /></li>
 			<a href="" id="mapsLink">Map</a>
 			<div id="map"></div>
- 
 		</ul>
-
 		<?php
-
 	}
 
 	/*
@@ -87,10 +79,10 @@
 	 */
 	function save_findusat_meta( $post_id, $post )
 	{
-	    if ( ! current_user_can( 'edit_post', $post_id ) ) {
-	        return;
-	    }
-	 
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
+		}
+
 		// set default values incase user didn't set them.
 		$findusat_meta['address_line_1'] = isset($_POST['address_line_1']) ? $_POST['address_line_1'] : 'none';
 		$findusat_meta['address_line_2'] = isset($_POST['address_line_2']) ? $_POST['address_line_2'] : 'nope';
@@ -138,25 +130,23 @@
 		wp_register_script( 'findusat_admin_script', plugins_url('assets/js/admin_findusat.js', __FILE__), array('jquery', 'findusat_google_maps_api'), '1.1', true );
 		wp_enqueue_script( 'findusat_admin_script' );
 	}
-
 	add_action( 'wp_ajax_getCoordinates', 'getCoordinates' );
 
-	function getCoordinates(){
-	
+	function getCoordinates()
+	{
 		$address = str_replace(" ", "+", $_POST['address']);
 		
 		$url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
-		
+
 		$response = file_get_contents($url);
 		
 		$json = json_decode($response,TRUE); //generate array object from the response from the web
-		
+
 		$lat_lng = array(
 			'lat' => $json['results'][0]['geometry']['location']['lat'],
 			'lng' => $json['results'][0]['geometry']['location']['lng']
 		);
-		//echo json_encode($lat_lng);
 
-		 echo $json['results'][0]['geometry']['location']['lat'].",".$json['results'][0]['geometry']['location']['lng']; 
+		echo $json['results'][0]['geometry']['location']['lat'].",".$json['results'][0]['geometry']['location']['lng'];
 	}
 ?>

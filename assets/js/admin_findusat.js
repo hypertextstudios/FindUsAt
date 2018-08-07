@@ -1,4 +1,5 @@
-jQuery(function($) {
+jQuery(function($)
+{
 	$('.submit_address').on('click',function()
 	{
 		var address_line_1 = $('.address_line_1').val();

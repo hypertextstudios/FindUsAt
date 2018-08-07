@@ -92,8 +92,11 @@
 		foreach ( $findusat_meta as $key => $value )
 		{
 			if ( $post->post_type == 'revision' ) return;
+
 			$value = implode( ',', (array)$value );
-			if ( get_post_meta( $post->ID, $key, FALSE ) ) {
+
+			if ( get_post_meta( $post->ID, $key, FALSE ) )
+			{
 				update_post_meta( $post->ID, $key, $value );
 			} else {
 				add_post_meta( $post->ID, $key, $value );

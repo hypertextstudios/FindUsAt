@@ -10,10 +10,60 @@
 
 	$googlemaps_api_key = 'AIzaSyAbbaCFnkLFkAKUX8pmXBdnZtkjO206VSg';
 
+	add_shortcode( 'findusat', 'findusat_shortcode' );
 
 	add_action( 'admin_menu', 'findusat_menu' );
 	add_action( 'wp_enqueue_scripts', 'findusat_adding_scripts' );
 	add_action( 'admin_enqueue_scripts', 'findusat_adding_admin_scripts' );
+
+	add_action( 'wp_ajax_get_coordinates_for_shortcode', 'get_coordinates_for_shortcode' );
+	add_action( 'wp_ajax_nopriv_get_coordinates_for_shortcode', 'get_coordinates_for_shortcode' );
+
+	function findusat_shortcode()
+	{
+		echo '<div id="findusat_map"></div>';
+		//get_coordinates_for_shortcode();
+		//echo "<pre>".print_r( $posts, true )."</pre>";
+	}
+
+	function get_coordinates_for_shortcode()
+	{
+		$coordinates = array();
+		$c = 0;
+
+		$args = array(
+			'post_type' => 'location',
+		);
+		$the_query = new WP_Query( $args );
+
+		// The Loop
+		if ( $the_query->have_posts() )
+		{
+			while ( $the_query->have_posts() )
+			{
+				$the_query->the_post();
+
+				// get x/y latitude
+				$address_line_1 = get_post_meta( get_the_ID(), 'address_line_1', true );
+				$address_line_2 = get_post_meta( get_the_ID(), 'address_line_2', true );
+				$x_coordinate = get_post_meta( get_the_ID(), 'x_coordinate', true );
+				$y_coordinate = get_post_meta( get_the_ID(), 'y_coordinate', true );
+				
+				$location_name = get_the_title();
+				$coord_combo = array( $location_name, $x_coordinate , $y_coordinate );
+
+				$coordinates[$c] = $coord_combo;
+				$c++;
+			}
+			/* Restore original Post Data */
+			wp_reset_postdata();
+		} else {
+			// no posts found
+		}
+		$coordinates = json_encode($coordinates);
+		echo $coordinates;
+		die();
+	}
 
 	function findusat_menu()
 	{
@@ -33,7 +83,8 @@
 	/*
 	 * register the custom post type
 	 */
-	function findusat_locations_init() {
+	function findusat_locations_init()
+	{
 		$args = array(
 			'public' => true,
 			'label' => 'Locations'
@@ -84,10 +135,10 @@
 		}
 
 		// set default values incase user didn't set them.
-		$findusat_meta['address_line_1'] = isset($_POST['address_line_1']) ? $_POST['address_line_1'] : 'none';
-		$findusat_meta['address_line_2'] = isset($_POST['address_line_2']) ? $_POST['address_line_2'] : 'nope';
-		$findusat_meta['x_coordinate'] = isset($_POST['x_coordinate']) ? $_POST['x_coordinate'] : 'nota';
-		$findusat_meta['y_coordinate'] = isset($_POST['y_coordinate']) ? $_POST['y_coordinate'] : 'zip';
+		$findusat_meta['address_line_1'] = isset($_POST['address_line_1']) ? $_POST['address_line_1'] : '';
+		$findusat_meta['address_line_2'] = isset($_POST['address_line_2']) ? $_POST['address_line_2'] : '';
+		$findusat_meta['x_coordinate'] = isset($_POST['x_coordinate']) ? $_POST['x_coordinate'] : '';
+		$findusat_meta['y_coordinate'] = isset($_POST['y_coordinate']) ? $_POST['y_coordinate'] : '';
 
 		foreach ( $findusat_meta as $key => $value )
 		{
@@ -111,9 +162,14 @@
 	 */
 	function findusat_adding_scripts()
 	{
+		global $googlemaps_api_key;
 		wp_register_style( 'findusat_style', plugins_url( 'assets/css/findusat.css', __FILE__) );
 		wp_enqueue_style( 'findusat_style' );
-		wp_register_script( 'findusat_script', plugins_url('assets/js/findusat.js', __FILE__), array('jquery'), '1.1', true );
+		wp_register_script( 'findusat_google_maps_api', 'https://maps.googleapis.com/maps/api/js?key='.$googlemaps_api_key, '1', true );
+		wp_enqueue_script( 'findusat_google_maps_api' );
+		wp_register_script( 'findusat_script', plugins_url('assets/js/findusat.js', __FILE__), array('jquery', 'findusat_google_maps_api'), '1.1', true );
+		
+		wp_localize_script( 'findusat_script', 'fua_coords', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 		wp_enqueue_script( 'findusat_script' );
 	}
 
@@ -137,13 +193,13 @@
 
 	function getCoordinates()
 	{
-		$address = str_replace(" ", "+", $_POST['address']);
+		$address = str_replace( " ", "+", $_POST['address'] );
 		
 		$url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
 
-		$response = file_get_contents($url);
+		$response = file_get_contents( $url );
 		
-		$json = json_decode($response,TRUE); //generate array object from the response from the web
+		$json = json_decode( $response, TRUE ); //generate array object from the response from the web
 
 		$lat_lng = array(
 			'lat' => $json['results'][0]['geometry']['location']['lat'],

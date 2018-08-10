@@ -19,6 +19,9 @@
 	add_action( 'wp_ajax_get_coordinates_for_shortcode', 'get_coordinates_for_shortcode' );
 	add_action( 'wp_ajax_nopriv_get_coordinates_for_shortcode', 'get_coordinates_for_shortcode' );
 
+	/*
+	 * register findusat shortcode to display map
+	 */
 	function findusat_shortcode()
 	{
 		echo '<div id="findusat_map"></div>';
@@ -26,6 +29,9 @@
 		//echo "<pre>".print_r( $posts, true )."</pre>";
 	}
 
+	/*
+	 * Build an array of all coordinates when FindUsAt shortcode is called
+	 */
 	function get_coordinates_for_shortcode()
 	{
 		$coordinates = array();
@@ -65,11 +71,17 @@
 		die();
 	}
 
+	/*
+	 * Add link to options page into the Settings menu
+	 */
 	function findusat_menu()
 	{
 		add_submenu_page('options-general.php', 'Find Us At', 'Find Us At', 'manage_options', 'findusat', 'findusat_options' );
 	}
 
+	/*
+	 * output the settings page for users to configure FindUsAt
+	 */
 	function findusat_options()
 	{
 		?>
@@ -126,7 +138,7 @@
 	}
 
 	/*
-	 * save the meta
+	 * save the meta data when the page is saved or published
 	 */
 	function save_findusat_meta( $post_id, $post )
 	{
@@ -193,6 +205,10 @@
 	}
 	add_action( 'wp_ajax_getCoordinates', 'getCoordinates' );
 
+
+	/*
+	 * returns a single set of coordinates from a provided address 
+	 */
 	function getCoordinates()
 	{
 		$address = str_replace( " ", "+", $_POST['address'] );

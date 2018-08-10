@@ -1,5 +1,6 @@
 jQuery( document ).ready( function()
 {
+	// display the map for all locations
 	function view_initMap(coords_response)
 	{
 		var coords = JSON.parse(coords_response);
@@ -25,6 +26,7 @@ jQuery( document ).ready( function()
 		}
 	}
 
+	// get array of location data and pass them to view_initMap()
 	jQuery.ajax({
 		url: fua_coords.ajax_url,
 		type: 'post',

@@ -1,11 +1,11 @@
 jQuery(function($)
 {
+	// get coordinates of the address provided
 	$('.submit_address').on('click',function()
 	{
 		var address_line_1 = $('.address_line_1').val();
 		var address_line_2 = $('.address_line_2').val();
 		var address = address_line_1.replace(' ','+') + address_line_2.replace(' ','+');
-		// get coordinates
 
 		$.ajax({
 			url : ajaxurl,
@@ -25,16 +25,19 @@ jQuery(function($)
 		return false;
 	});
 
+	// Check if coordinates exist, if they do populate the map
 	if ( $('#x_coordinate') != '' && $('#y_coordinate') != '' )
 	{
 		ajax_initMap();
 	}
 
+	// display the map with a marker
 	function ajax_initMap()
 	{
 		var lat = parseFloat( $('#x_coordinate').val() );
 		var lng = parseFloat( $('#y_coordinate').val() );
 		var myLatLng = { lat: lat, lng: lng };
+		
 		map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 4,
 			center: myLatLng

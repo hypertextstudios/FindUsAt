@@ -163,8 +163,10 @@
 	function findusat_adding_scripts()
 	{
 		global $googlemaps_api_key;
+
 		wp_register_style( 'findusat_style', plugins_url( 'assets/css/findusat.css', __FILE__) );
 		wp_enqueue_style( 'findusat_style' );
+
 		wp_register_script( 'findusat_google_maps_api', 'https://maps.googleapis.com/maps/api/js?key='.$googlemaps_api_key, '1', true );
 		wp_enqueue_script( 'findusat_google_maps_api' );
 		wp_register_script( 'findusat_script', plugins_url('assets/js/findusat.js', __FILE__), array('jquery', 'findusat_google_maps_api'), '1.1', true );
@@ -205,7 +207,8 @@
 			'lat' => $json['results'][0]['geometry']['location']['lat'],
 			'lng' => $json['results'][0]['geometry']['location']['lng']
 		);
-
+		
 		echo $json['results'][0]['geometry']['location']['lat'].",".$json['results'][0]['geometry']['location']['lng'];
+		die();
 	}
 ?>

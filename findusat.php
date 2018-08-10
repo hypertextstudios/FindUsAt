@@ -8,6 +8,8 @@
 		Author URI: andrewkaser.com
 	*/
 
+	require_once( 'include/findusat_admin_settings.php' );
+
 	$googlemaps_api_key = 'AIzaSyAbbaCFnkLFkAKUX8pmXBdnZtkjO206VSg';
 
 	add_shortcode( 'findusat', 'findusat_shortcode' );
@@ -25,56 +27,6 @@
 	function findusat_shortcode()
 	{
 		echo '<div id="findusat_map"></div>';
-	}
-
-	/*
-	 * Build an array of all coordinates when FindUsAt shortcode is called
-	 */
-	function get_coordinates_for_shortcode()
-	{
-		$coordinates = array();
-		$c = 0;
-
-		$args = array(
-			'post_type' => 'location',
-		);
-		$the_query = new WP_Query( $args );
-
-		// The Loop
-		if ( $the_query->have_posts() )
-		{
-			while ( $the_query->have_posts() )
-			{
-				$the_query->the_post();
-
-				// get x/y latitude
-				$address_line_1 = get_post_meta( get_the_ID(), 'address_line_1', true );
-				$address_line_2 = get_post_meta( get_the_ID(), 'address_line_2', true );
-				$x_coordinate = get_post_meta( get_the_ID(), 'x_coordinate', true );
-				$y_coordinate = get_post_meta( get_the_ID(), 'y_coordinate', true );
-				
-				$location_name = get_the_title();
-				$coord_combo = array( $location_name, $x_coordinate , $y_coordinate );
-
-				$coordinates[$c] = $coord_combo;
-				$c++;
-			}
-			/* Restore original Post Data */
-			wp_reset_postdata();
-		} else {
-			// no posts found
-		}
-		$coordinates = json_encode($coordinates);
-		echo $coordinates;
-		die();
-	}
-
-	/*
-	 * Add link to options page into the Settings menu
-	 */
-	function findusat_menu()
-	{
-		add_submenu_page('options-general.php', 'Find Us At', 'Find Us At', 'manage_options', 'findusat', 'findusat_options' );
 	}
 
 	/*
@@ -223,6 +175,48 @@
 		);
 		
 		echo $json['results'][0]['geometry']['location']['lat'].",".$json['results'][0]['geometry']['location']['lng'];
+		die();
+	}
+
+	/*
+	 * Build an array of all coordinates when FindUsAt shortcode is called
+	 */
+	function get_coordinates_for_shortcode()
+	{
+		$coordinates = array();
+		$c = 0;
+
+		$args = array(
+			'post_type' => 'location',
+		);
+		$the_query = new WP_Query( $args );
+
+		// The Loop
+		if ( $the_query->have_posts() )
+		{
+			while ( $the_query->have_posts() )
+			{
+				$the_query->the_post();
+
+				// get x/y latitude
+				$address_line_1 = get_post_meta( get_the_ID(), 'address_line_1', true );
+				$address_line_2 = get_post_meta( get_the_ID(), 'address_line_2', true );
+				$x_coordinate = get_post_meta( get_the_ID(), 'x_coordinate', true );
+				$y_coordinate = get_post_meta( get_the_ID(), 'y_coordinate', true );
+				
+				$location_name = get_the_title();
+				$coord_combo = array( $location_name, $x_coordinate , $y_coordinate );
+
+				$coordinates[$c] = $coord_combo;
+				$c++;
+			}
+			/* Restore original Post Data */
+			wp_reset_postdata();
+		} else {
+			// no posts found
+		}
+		$coordinates = json_encode($coordinates);
+		echo $coordinates;
 		die();
 	}
 ?>

@@ -25,8 +25,6 @@
 	function findusat_shortcode()
 	{
 		echo '<div id="findusat_map"></div>';
-		//get_coordinates_for_shortcode();
-		//echo "<pre>".print_r( $posts, true )."</pre>";
 	}
 
 	/*

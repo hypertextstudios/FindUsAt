@@ -11,8 +11,8 @@ jQuery(function($)
 			url : ajaxurl,
 			type : 'post',
 			data : {
-			action : 'getCoordinates',
-			address : address
+				action : 'getCoordinates',
+				address : address
 			},
 			success : function( response ) {
 				var lat_lng = response.split(',');

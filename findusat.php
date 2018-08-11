@@ -22,9 +22,13 @@
 	/*
 	 * register findusat shortcode to display map
 	 */
-	function findusat_shortcode()
+	function findusat_shortcode( $atts )
 	{
-		echo '<div id="findusat_map"></div>';
+		$a = shortcode_atts( array(
+			'width' => '400',
+			'height' => '350',
+		), $atts );
+		echo '<div id="findusat_map" style="width:' . $a['width'] . '; height:' . $a['height'] . ';"></div>';
 	}
 
 	/*

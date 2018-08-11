@@ -10,8 +10,6 @@
 
 	require_once( 'include/findusat_admin_settings.php' );
 
-	$googlemaps_api_key = 'AIzaSyAbbaCFnkLFkAKUX8pmXBdnZtkjO206VSg';
-
 	add_shortcode( 'findusat', 'findusat_shortcode' );
 
 	add_action( 'admin_menu', 'findusat_menu' );
@@ -27,19 +25,6 @@
 	function findusat_shortcode()
 	{
 		echo '<div id="findusat_map"></div>';
-	}
-
-	/*
-	 * output the settings page for users to configure FindUsAt
-	 */
-	function findusat_options()
-	{
-		?>
-		<div class="wrap">
-			<h1 class="wp-heading-inline">Find Us At - Settings</h1>
-			<p>Please configure the plugin to operate how you'd like it to. If you have any suggestions please shoot them over to kaser@cssboss.com</p>
-		</div>
-		<?php
 	}
 
 	/*
@@ -124,7 +109,7 @@
 	 */
 	function findusat_adding_scripts()
 	{
-		global $googlemaps_api_key;
+		$googlemaps_api_key = get_option ( 'findusat_googlemaps_api_key' );
 
 		wp_register_style( 'findusat_style', plugins_url( 'assets/css/findusat.css', __FILE__) );
 		wp_enqueue_style( 'findusat_style' );
@@ -142,7 +127,7 @@
 	 */
 	function findusat_adding_admin_scripts()
 	{
-		global $googlemaps_api_key;
+		$googlemaps_api_key = get_option ( 'findusat_googlemaps_api_key' );
 
 		wp_register_style( 'findusat_admin_style', plugins_url( 'assets/css/admin_findusat.css', __FILE__) );
 		wp_enqueue_style( 'findusat_admin_style' );

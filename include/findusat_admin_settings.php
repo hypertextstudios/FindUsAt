@@ -59,7 +59,7 @@ function findusat_settings_api_init()
 
 	register_setting(
 		'findusat',
-		'findusat_googlemaps_api_key'
+		'findusat_global_options'
 	);
 }
 
@@ -67,9 +67,9 @@ add_action( 'admin_init', 'findusat_settings_api_init' );
 
 function findusat_googlemaps_api_key_setting_func()
 {
-	$options = get_option ( 'findusat_googlemaps_api_key' );
-	$value = isset ( $options ['findusat_global_options'] ) ? $options ['findusat_global_options'] : $options;
-	echo '<input type="text" placeholder="Please Insert Your Google Maps API Key" name="findusat_googlemaps_api_key" value="' . $options . '">';
+	$options = get_option ( 'findusat_global_options' );
+	$value = isset ( $options['findusat_googlemaps_api_key'] ) ? $options['findusat_googlemaps_api_key'] : $options;
+	echo '<input type="text" placeholder="Please Insert Your Google Maps API Key" name="findusat_global_options[findusat_googlemaps_api_key]" value="' . $value . '">';
 }
 
 function findusat_global_settings_func()

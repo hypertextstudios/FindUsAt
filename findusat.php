@@ -109,7 +109,8 @@
 	 */
 	function findusat_adding_scripts()
 	{
-		$googlemaps_api_key = get_option ( 'findusat_googlemaps_api_key' );
+		$findusat_options = get_option ( 'findusat_global_options' );
+		$googlemaps_api_key = isset ( $findusat_options['findusat_googlemaps_api_key'] ) ? $findusat_options['findusat_googlemaps_api_key'] : $options;
 
 		wp_register_style( 'findusat_style', plugins_url( 'assets/css/findusat.css', __FILE__) );
 		wp_enqueue_style( 'findusat_style' );
@@ -127,7 +128,8 @@
 	 */
 	function findusat_adding_admin_scripts()
 	{
-		$googlemaps_api_key = get_option ( 'findusat_googlemaps_api_key' );
+		$findusat_options = get_option ( 'findusat_global_options' );
+		$googlemaps_api_key = isset ( $findusat_options['findusat_googlemaps_api_key'] ) ? $findusat_options['findusat_googlemaps_api_key'] : $options;
 
 		wp_register_style( 'findusat_admin_style', plugins_url( 'assets/css/admin_findusat.css', __FILE__) );
 		wp_enqueue_style( 'findusat_admin_style' );

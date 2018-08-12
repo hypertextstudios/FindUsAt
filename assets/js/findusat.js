@@ -12,7 +12,11 @@ jQuery( document ).ready( function()
 
 		for ( i = 0; i < coords.length; i++ )
 		{
+
+
 			var title = coords[i][0];
+			var title = title.replace(/&amp;/g, '&');
+			var title = title.replace(/&#038;/g, '&');
 			var lat = parseFloat(coords[i][1]);
 			var lng = parseFloat(coords[i][2]);
 

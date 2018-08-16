@@ -4,16 +4,15 @@ jQuery( document ).ready( function()
 	function view_initMap(coords_response)
 	{
 		var coords = JSON.parse(coords_response);
+		var bounds  = new google.maps.LatLngBounds();
 
 		map = new google.maps.Map(document.getElementById('findusat_map'), {
-			zoom: 8,
+			zoom: 15,
 			center: { lat: 42.2741366, lng: -85.6671883 }
 		});
 
 		for ( i = 0; i < coords.length; i++ )
 		{
-
-
 			var title = coords[i][0];
 			var title = title.replace(/&amp;/g, '&');
 			var title = title.replace(/&#038;/g, '&');
@@ -25,9 +24,15 @@ jQuery( document ).ready( function()
 			var marker = new google.maps.Marker({
 				map: map,
 				position: myLatLng,
-				title: title
+				title: ''+title+''
 			});
+
+			loc = new google.maps.LatLng(lat, lng);
+			bounds.extend(loc);
 		}
+		
+		map.fitBounds(bounds);
+		map.panToBounds(bounds);
 	}
 
 	// get array of location data and pass them to view_initMap()

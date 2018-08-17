@@ -4,7 +4,7 @@
 		Plugin URI: http://andrewkaser.com/#
 		Description: Location of stores where your items can be found, and easily provide directions at the click of a button
 		Author: Kaser
-		Version: 0.1
+		Version: 1.0
 		Author URI: andrewkaser.com
 	*/
 
@@ -29,6 +29,42 @@
 			'height' => '350',
 		), $atts );
 		echo '<div id="findusat_map" style="width:' . $a['width'] . '; height:' . $a['height'] . ';"></div>';
+	
+		$args = array(
+			'post_type' => 'location',
+		);
+		$the_query = new WP_Query( $args );
+
+		echo '<ul id="findusat_locations">';
+		// The Loop
+		if ( $the_query->have_posts() )
+		{
+			while ( $the_query->have_posts() )
+			{
+				$the_query->the_post();
+
+				// get x/y latitude
+				$address_line_1 = get_post_meta( get_the_ID(), 'address_line_1', true );
+				$address_line_2 = get_post_meta( get_the_ID(), 'address_line_2', true );
+				$x_coordinate = get_post_meta( get_the_ID(), 'x_coordinate', true );
+				$y_coordinate = get_post_meta( get_the_ID(), 'y_coordinate', true );
+				
+				$location_name = get_the_title();
+				$map_link = "https://google.com/maps/dir/".$x_coordinate.",".$y_coordinate;
+				echo '<li>
+					<ul>
+						<li><h2><a href="'.$map_link.'">'.$location_name.'</a></h2></li>
+						<li><a href="'.$map_link.'">'.$address_line_1.'</a></li>
+						<li><a href="'.$map_link.'">'.$address_line_2.'</a></li>
+					</ul>
+				</li>';
+			}
+			/* Restore original Post Data */
+			wp_reset_postdata();
+		} else {
+			// no posts found
+		}
+		echo '</ul>';
 	}
 
 	/*

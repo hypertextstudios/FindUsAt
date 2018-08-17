@@ -1,1 +1,6 @@
 #findusat_map { color: #ff0000; }
+#findusat_locations li { list-style: none; }
+#findusat_locations ul li h2 a:link,
+#findusat_locations ul li ul li a:link { text-decoration: none; }
+#findusat_locations ul li h2 a:hover,
+#findusat_locations ul li ul li a:hover { text-decoration: underline; }

@@ -26,7 +26,7 @@ jQuery(function($)
 	});
 
 	// Check if coordinates exist, if they do populate the map
-	if ( $('#x_coordinate') != '' && $('#y_coordinate') != '' )
+	if ( $('#x_coordinate').val() !== '' && $('#y_coordinate').val() !== '' )
 	{
 		ajax_initMap();
 	}

@@ -40,7 +40,6 @@ jQuery( document ).ready( function()
 
 			loc = new google.maps.LatLng(lat, lng);
 			bounds.extend(loc);
-			sleep(200);
 		}
 
 		map.fitBounds(bounds);
@@ -62,9 +61,4 @@ jQuery( document ).ready( function()
 		}
 	});
 
-	function sleep(milliSeconds)
-	{
-		var startTime = new Date().getTime();
-		while (new Date().getTime() < startTime + milliSeconds);\
-	}
 });

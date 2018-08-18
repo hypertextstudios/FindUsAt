@@ -233,9 +233,9 @@
 				$address_line_2 = get_post_meta( get_the_ID(), 'address_line_2', true );
 				$x_coordinate = get_post_meta( get_the_ID(), 'x_coordinate', true );
 				$y_coordinate = get_post_meta( get_the_ID(), 'y_coordinate', true );
-				
+				$infowindow_data = get_the_content();
 				$location_name = get_the_title();
-				$coord_combo = array( $location_name, $x_coordinate , $y_coordinate );
+				$coord_combo = array( $location_name, $x_coordinate , $y_coordinate, $infowindow_data );
 
 				$coordinates[$c] = $coord_combo;
 				$c++;

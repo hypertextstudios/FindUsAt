@@ -19,6 +19,7 @@ jQuery( document ).ready( function()
 			var title = title.replace(/&#038;/g, '&');
 			var lat = parseFloat(coords[i][1]);
 			var lng = parseFloat(coords[i][2]);
+			var infowindow = new google.maps.InfoWindow({});
 
 			var myLatLng = {lat: lat, lng: lng};
 
@@ -27,6 +28,15 @@ jQuery( document ).ready( function()
 				position: myLatLng,
 				title: ''+title+''
 			});
+
+			google.maps.event.addListener(marker, 'click', (function (marker, i)
+			{
+				return function ()
+				{
+					infowindow.setContent(coords[i][3]);
+					infowindow.open(map, marker);
+				}
+			})(marker, i));
 
 			loc = new google.maps.LatLng(lat, lng);
 			bounds.extend(loc);

@@ -1,6 +1,13 @@
 #findusat_map { color: #ff0000; }
-#findusat_locations li { list-style: none; }
-#findusat_locations ul li h2 a:link,
-#findusat_locations ul li ul li a:link { text-decoration: none; }
-#findusat_locations ul li h2 a:hover,
-#findusat_locations ul li ul li a:hover { text-decoration: underline; }
+
+#findusat_locations { margin-top: 50px; }
+#findusat_locations li { margin-left: 0px; }
+#findusat_locations li ul li { list-style: none; }
+#findusat_locations li ul { margin-bottom: 25px; }
+#findusat_locations li ul li h2 { padding-bottom: 10px; }
+#findusat_locations li ul li h2 a { padding-left: 0; }
+#findusat_locations li ul li a { padding-left: 20px; }
+#findusat_locations li ul li h2 a:link,
+#findusat_locations li ul li a:link { text-decoration: none; }
+#findusat_locations li h2 a:hover,
+#findusat_locations li ul li a:hover { text-decoration: underline; }

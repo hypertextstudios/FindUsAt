@@ -13,6 +13,7 @@ jQuery( document ).ready( function()
 
 		for ( i = 0; i < coords.length; i++ )
 		{
+
 			var title = coords[i][0];
 			var title = title.replace(/&amp;/g, '&');
 			var title = title.replace(/&#038;/g, '&');
@@ -29,8 +30,9 @@ jQuery( document ).ready( function()
 
 			loc = new google.maps.LatLng(lat, lng);
 			bounds.extend(loc);
+			sleep(200);
 		}
-		
+
 		map.fitBounds(bounds);
 		map.panToBounds(bounds);
 	}
@@ -49,4 +51,10 @@ jQuery( document ).ready( function()
 			return false;
 		}
 	});
+
+	function sleep(milliSeconds)
+	{
+		var startTime = new Date().getTime();
+		while (new Date().getTime() < startTime + milliSeconds);\
+	}
 });

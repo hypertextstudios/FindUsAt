@@ -28,10 +28,12 @@
 			'width' => '400',
 			'height' => '350',
 		), $atts );
+
 		echo '<div id="findusat_map" style="width:' . $a['width'] . '; height:' . $a['height'] . ';"></div>';
-	
+
 		$args = array(
 			'post_type' => 'location',
+			'posts_per_page' => -1,
 		);
 		$the_query = new WP_Query( $args );
 

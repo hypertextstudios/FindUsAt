@@ -30,7 +30,7 @@
 		), $atts );
 
 		echo '<div id="findusat_map" style="width:' . $a['width'] . '; height:' . $a['height'] . ';"></div>';
-
+		echo '<h2>We\'re at <span id="location_count">...</span> locations!</h2>';
 		$args = array(
 			'post_type' => 'location',
 			'posts_per_page' => -1,

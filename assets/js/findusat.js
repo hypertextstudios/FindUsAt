@@ -5,13 +5,17 @@ jQuery( document ).ready( function()
 	{
 		var coords = JSON.parse(coords_response);
 		var bounds  = new google.maps.LatLngBounds();
+		var locationCount = coords.length;
 
 		map = new google.maps.Map(document.getElementById('findusat_map'), {
 			zoom: 15,
 			center: { lat: 42.2741366, lng: -85.6671883 }
 		});
 
-		for ( i = 0; i < coords.length; i++ )
+
+		jQuery('#location_count').html(locationCount);
+		
+		for ( i = 0; i < locationCount; i++ )
 		{
 
 			var title = coords[i][0];

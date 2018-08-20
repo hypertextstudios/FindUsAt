@@ -1,5 +1,6 @@
 #findusat_map { color: #ff0000; }
 
+#locations_info { margin-top: 50px; }
 #findusat_locations { margin-top: 50px; }
 #findusat_locations li { margin-left: 0px; }
 #findusat_locations li ul li { list-style: none; }

@@ -124,10 +124,10 @@
 		}
 
 		// set default values incase user didn't set them.
-		$findusat_meta['address_line_1'] = isset($_POST['address_line_1']) ? $_POST['address_line_1'] : '';
-		$findusat_meta['address_line_2'] = isset($_POST['address_line_2']) ? $_POST['address_line_2'] : '';
-		$findusat_meta['x_coordinate'] = isset($_POST['x_coordinate']) ? $_POST['x_coordinate'] : '';
-		$findusat_meta['y_coordinate'] = isset($_POST['y_coordinate']) ? $_POST['y_coordinate'] : '';
+		$findusat_meta['address_line_1'] = isset($_POST['address_line_1']) ? sanitize_text_field($_POST['address_line_1']) : '';
+		$findusat_meta['address_line_2'] = isset($_POST['address_line_2']) ? sanitize_text_field($_POST['address_line_2']) : '';
+		$findusat_meta['x_coordinate'] = isset($_POST['x_coordinate']) ? floatval($_POST['x_coordinate']) : '';
+		$findusat_meta['y_coordinate'] = isset($_POST['y_coordinate']) ? floatval($_POST['y_coordinate']) : '';
 
 		foreach ( $findusat_meta as $key => $value )
 		{
@@ -190,7 +190,7 @@
 	 */
 	function getCoordinates()
 	{
-		$address = str_replace( " ", "+", $_POST['address'] );
+		$address = str_replace( " ", "+", sanitize_text_field($_POST['address']) );
 		
 		$url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
 

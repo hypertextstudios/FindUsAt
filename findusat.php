@@ -56,6 +56,7 @@
 				$map_link = "https://google.com/maps/dir/".$x_coordinate.",".$y_coordinate;
 				echo '<li>
 					<ul>
+						<a name="'.get_the_ID().'"></a>
 						<li><h2><a href="'.$map_link.'">'.$location_name.'</a></h2></li>
 						<li><a href="'.$map_link.'">'.$address_line_1.'</a></li>
 						<li><a href="'.$map_link.'">'.$address_line_2.'</a></li>

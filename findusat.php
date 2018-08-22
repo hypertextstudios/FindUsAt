@@ -33,6 +33,8 @@
 		$args = array(
 			'post_type' => 'location',
 			'posts_per_page' => -1,
+			'orderby' => 'title',
+			'order' => 'ASC',
 		);
 		$the_query = new WP_Query( $args );
 

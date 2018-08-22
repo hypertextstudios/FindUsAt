@@ -9,6 +9,10 @@
 #findusat_locations li ul li h2 a { padding-left: 0; }
 #findusat_locations li ul li a { padding-left: 20px; }
 #findusat_locations li ul li h2 a:link,
-#findusat_locations li ul li a:link { text-decoration: none; }
+#findusat_locations li ul li a:link,
+#findusat_locations li ul li h2 a:visited,
+#findusat_locations li ul li a:visited { text-decoration: none; }
 #findusat_locations li h2 a:hover,
-#findusat_locations li ul li a:hover { text-decoration: underline; }
+#findusat_locations li ul li a:hover,
+#findusat_locations li h2 a:active,
+#findusat_locations li ul li a:active { text-decoration: underline; }

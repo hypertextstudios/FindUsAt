@@ -29,7 +29,8 @@
 			'height' => '350',
 		), $atts );
 
-		echo '<div id="findusat_map" style="width:' . $a['width'] . '; height:' . $a['height'] . ';"></div>';
+		$output = '';
+		$output .= '<div id="findusat_map" style="width:' . $a['width'] . '; height:' . $a['height'] . ';"></div>';
 		$args = array(
 			'post_type' => 'location',
 			'posts_per_page' => -1,
@@ -38,7 +39,7 @@
 		);
 		$the_query = new WP_Query( $args );
 
-		echo '<ul id="findusat_locations">';
+		$output .= '<ul id="findusat_locations">';
 		// The Loop
 		if ( $the_query->have_posts() )
 		{
@@ -54,7 +55,7 @@
 				
 				$location_name = get_the_title();
 				$map_link = "https://google.com/maps/dir/".$x_coordinate.",".$y_coordinate;
-				echo '<li>
+				$output .= '<li>
 					<ul>
 						<a name="'.get_the_ID().'"></a>
 						<li><h2><a href="'.$map_link.'">'.$location_name.'</a></h2></li>
@@ -68,7 +69,9 @@
 		} else {
 			// no posts found
 		}
-		echo '</ul>';
+		$output .= '</ul>';
+
+		return $output;
 	}
 
 	/*

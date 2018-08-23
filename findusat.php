@@ -3,8 +3,8 @@
 		Plugin Name: FindUsAt
 		Plugin URI: http://andrewkaser.com/#
 		Description: Location of stores where your items can be found, and easily provide directions at the click of a button
-		Author: Kaser
-		Version: 1.0
+		Author: kaser
+		Version: 1.1
 		Author URI: andrewkaser.com
 	*/
 

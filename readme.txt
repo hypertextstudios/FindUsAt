@@ -4,7 +4,7 @@ Donate link: http://hypertext-studios.com/
 Tags: locations, store location, where to find us, brick & mortar, dealerships, dealers, find us at, we're in these stores, list the stores that your product is in
 Requires at least: 4.6
 Tested up to: 4.7
-Stable tag: 1.0
+Stable tag: 1.1
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -48,6 +48,12 @@ I just am!
 
 == Changelog ==
 
+= 1.1 =
+* Auto zoom and pan map to fit all markers
+* Added list of locations under map
+* Added infoWindows for each location with the_content()
+* Fixed empty values for x & y coordinates
+
 = 1.0 =
 * MVP version-
 * Allows user to set Google Maps API Key.
@@ -57,6 +63,9 @@ I just am!
 * Width and Height attributes for shortcode
 
 == Upgrade Notice ==
+
+= 1.1 =
+Lots of new google maps features included and some bug fixes!
 
 = 1.0 =
 This is the MVP, baby! It's all up hill from here.

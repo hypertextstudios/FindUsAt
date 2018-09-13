@@ -5,7 +5,7 @@
 		Description: Location of stores where your items can be found, and easily provide directions at the click of a button
 		Author: kaser
 		Version: 1.1
-		Author URI: andrewkaser.com
+		Author URI: hypertext-studios.com
 	*/
 
 	require_once( 'include/findusat_admin_settings.php' );

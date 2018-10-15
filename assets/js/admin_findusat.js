@@ -1,10 +1,10 @@
 jQuery(function($)
 {
 	// get coordinates of the address provided
-	$('.submit_address').on('click',function()
+	jQuery('.submit_address').on('click',function()
 	{
-		var address_line_1 = $('.address_line_1').val();
-		var address_line_2 = $('.address_line_2').val();
+		var address_line_1 = $('.address_line_1').val().replace(' ','+');
+		var address_line_2 = $('.address_line_2').val().replace(' ','+');
 		var address = address_line_1.replace(' ','+') + address_line_2.replace(' ','+');
 
 		$.ajax({
@@ -44,7 +44,7 @@ jQuery(function($)
 		});
 
 		var marker = new google.maps.Marker({
-			position: myLatLng,
+			position: myLatLng,	
 			map: map
 		});
 	}

@@ -10,7 +10,8 @@
 
 	require_once( 'include/findusat_admin_settings.php' );
 
-	add_shortcode( 'findusat', 'findusat_shortcode' );
+	add_shortcode( 'findusat', 'findusat_map_shortcode' );
+	add_shortcode( 'findusat_locations', 'findusat_locations_shortcode' );
 
 	add_action( 'admin_menu', 'findusat_menu' );
 	add_action( 'wp_enqueue_scripts', 'findusat_adding_scripts' );
@@ -22,7 +23,7 @@
 	/*
 	 * register findusat shortcode to display map
 	 */
-	function findusat_shortcode( $atts )
+	function findusat_map_shortcode( $atts )
 	{
 		$a = shortcode_atts( array(
 			'width' => '400',
@@ -31,6 +32,16 @@
 
 		$output = '';
 		$output .= '<div id="findusat_map" style="width:' . $a['width'] . '; height:' . $a['height'] . ';"></div>';
+		
+		return $output;
+	}
+
+	/*
+	 * register findusat locations shortcode to display a list of all locations
+	 * with links to google maps
+	 */
+	function findusat_locations_shortcode()
+	{
 		$args = array(
 			'post_type' => 'location',
 			'posts_per_page' => -1,
@@ -71,9 +82,7 @@
 		}
 		$output .= '</ul>';
 
-		return $output;
 	}
-
 	/*
 	 * register the custom post type
 	 */

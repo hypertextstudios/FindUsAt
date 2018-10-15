@@ -82,6 +82,7 @@
 		}
 		$output .= '</ul>';
 
+		return $output;
 	}
 	/*
 	 * register the custom post type

@@ -2,9 +2,9 @@
 Contributors: hypertextstudios, kaser
 Donate link: http://hypertext-studios.com/
 Tags: locations, store location, where to find us, brick & mortar, dealerships, dealers, find us at, we're in these stores, list the stores that your product is in
-Requires at least: 4.6
-Tested up to: 4.7
-Stable tag: 1.1
+Requires at least: 4.9
+Tested up to: 4.9
+Stable tag: 1.2
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -24,7 +24,8 @@ Thanks for checking out FindUsAt! Set up is super simple and only takes a few mi
 1. Upload the plugin files to the `/wp-content/plugins/findusat` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
 1. Use the Settings->FindUsAt screen to configure the plugin
-1. copy & Paste [findusat] into a page to display all your locations.
+1. copy & paste [findusat] into a page to display a map of all your locations.
+1. copy & paste [findusat_locations] into a page to display a list of all your locations.
 
 
 == Frequently Asked Questions ==
@@ -48,6 +49,13 @@ I just am!
 
 == Changelog ==
 
+= 1.2 =
+* Code changes for handling output
+* Updated some styles
+* Added correct information about the author
+* Added check for map element before running javascript
+* split the map and the list of locations into two shortcodes
+
 = 1.1 =
 * Auto zoom and pan map to fit all markers
 * Added list of locations under map
@@ -63,6 +71,9 @@ I just am!
 * Width and Height attributes for shortcode
 
 == Upgrade Notice ==
+
+= 1.2 =
+Fixed some errors and made it better :)
 
 = 1.1 =
 Lots of new google maps features included and some bug fixes!

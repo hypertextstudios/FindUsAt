@@ -69,9 +69,9 @@
 				$output .= '<li>
 					<ul>
 						<a name="'.get_the_ID().'"></a>
-						<li><h2><a href="'.$map_link.'">'.$location_name.'</a></h2></li>
-						<li><a href="'.$map_link.'">'.$address_line_1.'</a></li>
-						<li><a href="'.$map_link.'">'.$address_line_2.'</a></li>
+						<li><h2><a href="'.$map_link.'" target="_blank">'.$location_name.'</a></h2></li>
+						<li><a href="'.$map_link.'" target="_blank">'.$address_line_1.'</a></li>
+						<li><a href="'.$map_link.'" target="_blank">'.$address_line_2.'</a></li>
 					</ul>
 				</li>';
 			}
@@ -123,7 +123,7 @@
 			<li><input type="submit" class="submit_address" value="Generate Coordinates"/></li>
 			<li><input type="text" name="x_coordinate" placeholder="X Coordinate" id="x_coordinate" value="<?php echo $x_coordinate; ?>" /></li>
 			<li><input type="text" name="y_coordinate" placeholder="Y Coordinate" id="y_coordinate" value="<?php echo $y_coordinate; ?>" /></li>
-			<a href="" id="mapsLink">Map</a>
+			<a href="" id="mapsLink" target="_blank">Map</a>
 			<div id="map"></div>
 		</ul>
 		<?php

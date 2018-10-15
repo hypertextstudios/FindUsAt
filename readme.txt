@@ -4,7 +4,7 @@ Donate link: http://hypertext-studios.com/
 Tags: locations, store location, where to find us, brick & mortar, dealerships, dealers, find us at, we're in these stores, list the stores that your product is in
 Requires at least: 4.9
 Tested up to: 4.9
-Stable tag: 1.2
+Stable tag: 1.2.1
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -49,6 +49,9 @@ I just am!
 
 == Changelog ==
 
+= 1.2.1 =
+* Fixed [findusat_locations] shortcode to actually output the data, sorry about that.
+
 = 1.2 =
 * Code changes for handling output
 * Updated some styles
@@ -71,6 +74,9 @@ I just am!
 * Width and Height attributes for shortcode
 
 == Upgrade Notice ==
+
+= 1.2.1 =
+Fixed an error that prevents shortcode from outputting data!
 
 = 1.2 =
 Fixed some errors and made it better :)

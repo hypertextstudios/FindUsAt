@@ -4,7 +4,7 @@
 		Plugin URI: http://andrewkaser.com/#
 		Description: Location of stores where your items can be found, and easily provide directions at the click of a button
 		Author: kaser
-		Version: 1.2
+		Version: 1.2.1
 		Author URI: hypertext-studios.com
 	*/
 

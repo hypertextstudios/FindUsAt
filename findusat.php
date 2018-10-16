@@ -31,8 +31,9 @@
 		), $atts );
 
 		$output = '';
+		do_action('findusat_before_map');
 		$output .= '<div id="findusat_map" style="width:' . $a['width'] . '; height:' . $a['height'] . ';"></div>';
-		
+		do_action('findusat_after_map');
 		return $output;
 	}
 
@@ -49,7 +50,7 @@
 			'order' => 'ASC',
 		);
 		$the_query = new WP_Query( $args );
-
+		do_action('findusat_before_locations');
 		$output .= '<ul id="findusat_locations">';
 		// The Loop
 		if ( $the_query->have_posts() )
@@ -81,6 +82,7 @@
 			// no posts found
 		}
 		$output .= '</ul>';
+		do_action('findusat_after_map');
 
 		return $output;
 	}
@@ -115,9 +117,11 @@
 		$address_line_2 = get_post_meta( get_the_ID(), 'address_line_2', true );
 		$x_coordinate = get_post_meta( get_the_ID(), 'x_coordinate', true );
 		$y_coordinate = get_post_meta( get_the_ID(), 'y_coordinate', true );
+
 		?>
 
 		<ul>
+			<?php do_action('findusat_before_meta_data'); ?>
 			<li><input type="text" name="address_line_1" placeholder="Adress Line 1" class="address_line_1" value="<?php echo $address_line_1; ?>" /></li>
 			<li><input type="text" name="address_line_2" placeholder="Adress Line 2" class="address_line_2" value="<?php echo $address_line_2; ?>" /></li>
 			<li><input type="submit" class="submit_address" value="Generate Coordinates"/></li>
@@ -125,6 +129,8 @@
 			<li><input type="text" name="y_coordinate" placeholder="Y Coordinate" id="y_coordinate" value="<?php echo $y_coordinate; ?>" /></li>
 			<a href="" id="mapsLink" target="_blank">Map</a>
 			<div id="map"></div>
+
+			<?php do_action('findusat_after_meta_data'); ?>
 		</ul>
 		<?php
 	}

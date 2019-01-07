@@ -189,8 +189,11 @@
 	/*
 	 * load styles and js for wp-admin page
 	 */
-	function findusat_adding_admin_scripts()
+	function findusat_adding_admin_scripts( $hook )
 	{
+		if( $hook != 'post.php' ) 
+			return;
+
 		$findusat_options = get_option ( 'findusat_global_options' );
 		$googlemaps_api_key = isset ( $findusat_options['findusat_googlemaps_api_key'] ) ? $findusat_options['findusat_googlemaps_api_key'] : $options;
 
